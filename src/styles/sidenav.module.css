@@ -1,0 +1,54 @@
+.container {
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	height: 48%;
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}
+
+.line {
+	height: 1px;
+	width: 100%;
+	background-color: var(--gray-50);
+	margin-bottom: 1em;
+}
+.container > h1 {
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+	margin-left: 0.25em;
+}
+
+.section > h3 {
+	font-size: 1.1em;
+	margin-left: 0.25em;
+}
+
+.section > ul {
+	list-style-type: none;
+}
+
+.section > ul > li > a {
+	display: flex;
+	height: 3em;
+	transition: background-color 0.25s;
+	border-radius: 0.5em;
+	margin: 0.5em 0;
+	align-items: center;
+	padding-left: 0.5em;
+	color: var(--text);
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	font-size: 0.9em;
+}
+
+.section > ul > li > a > img {
+	height: 1.5em !important;
+	width: 1.5em !important;
+	margin-right: 1em;
+}
+.section > ul > li > a:hover {
+	background-color: var(--bg-darker);
+}

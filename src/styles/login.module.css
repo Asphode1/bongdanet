@@ -1,20 +1,109 @@
 .container {
+	min-height: 100vh;
+	min-width: 100vw;
+	background: linear-gradient(to top left, #e0f787, #4ee3fa);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .loginContainer {
+	background-color: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(10px);
+	box-shadow: 1px 1px 4px 2px rgba(127, 127, 127, 0.05);
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 1em;
+	width: 20vw;
+}
+
+.loginContainer > svg {
+	width: 2em !important;
+	height: 2em !important;
+}
+
+.loginContainer > form {
+	width: 90%;
+}
+
+.loginContainer > form label {
+	width: 100%;
 }
 
 .line {
+	margin: 0.5em 0;
 	height: 1px;
-	width: 80%;
+	width: 90%;
 	background-color: #222;
 }
 
 .input {
+	width: 100%;
 	border: none;
+	border-radius: 0.25em;
 	outline: none;
+	font-size: 1em;
+	margin: 0.5em 0 0;
+	padding: 0.5em;
+	background-color: rgba(255, 255, 255, 0.5);
 }
+
 .input:focus {
 	border: none;
 	outline: none;
+}
+
+.forget {
+	position: relative;
+	height: 2em;
+}
+
+.forget a {
+	color: var(--text);
+	font-size: 0.75em;
+	position: absolute;
+	top: 0.15em;
+	right: 0;
+}
+
+.loginBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginBtn > button {
+	background-color: var(--green-darkest);
+	color: var(--bg);
+	outline: none;
+	border: none;
+	border-radius: 1000px;
+	padding: 1em 0;
+	width: 100%;
+	cursor: pointer;
+}
+
+.signup {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5em;
+	width: 90%;
+}
+
+.signup > a {
+	display: block;
+	padding: 1em 0;
+	width: 100%;
+	font-size: 0.83333em;
+	color: var(--text);
+	background-color: var(--bg);
+	text-align: center;
+	border-radius: 1000px;
+}
+
+.signup > a:hover {
+	background-color: var(--bg-darker);
 }

@@ -10,7 +10,7 @@ export default function Layout() {
 			<header className={s.header}>
 				<Header />
 			</header>
-			<div className={s.container}>
+			<main className={s.container}>
 				<section>
 					<Sidenav />
 				</section>
@@ -20,7 +20,7 @@ export default function Layout() {
 					</Suspense>
 				</section>
 				<section></section>
-			</div>
+			</main>
 		</>
 	)
 }

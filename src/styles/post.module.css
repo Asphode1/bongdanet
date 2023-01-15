@@ -1,0 +1,28 @@
+.container {
+	height: 10vh;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+.container > div:first-child {
+	height: 10vh;
+	width: 10vh;
+}
+
+.container > div:first-child img {
+	height: 100%;
+	width: 100%;
+}
+
+.container > div:last-child {
+	flex: 1;
+	overflow: hidden;
+}
+
+.container > div:last-child > p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}

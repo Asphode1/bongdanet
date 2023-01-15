@@ -1,0 +1,154 @@
+.container {
+	background-color: var(--bg);
+	padding: 1em;
+	margin: 0 5vw;
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	box-shadow: 0 0 4px 1px rgba(128, 128, 128, 0.15);
+}
+
+.content > h1 {
+	font-size: 2em;
+	margin-bottom: 0.5em;
+}
+
+.content > h3 {
+	margin-bottom: 0.5em;
+}
+
+.content > div > p {
+	margin-bottom: 1em;
+}
+
+.line {
+	height: 1px;
+	background-color: var(--bg-darker);
+	width: 100%;
+}
+
+.comments > p {
+	margin: 0.5em 0;
+}
+
+.comments > ul {
+	list-style-type: none;
+}
+
+.userComment {
+	display: flex;
+	flex-direction: row;
+}
+
+.userComment > div:first-child {
+	flex: 1;
+}
+
+.userComment > div:first-child > svg {
+	width: 1.5em !important;
+	height: 1.5em !important;
+	margin-right: 0.3em;
+}
+
+.userComment > form {
+	flex: 19;
+}
+
+.userCommentText {
+	display: block;
+	resize: none;
+	width: 100%;
+	border-radius: 0.5em;
+	border: 1px solid #8885;
+	outline: none;
+	font-size: 1em;
+	padding: 0.5em;
+}
+
+.userCommentText::placeholder {
+	color: #8885;
+}
+
+.btn {
+	outline: none;
+	background-color: var(--green-darkest);
+	color: var(--bg);
+	border: none;
+	border-radius: 0.5em;
+	padding: 0.75em 2em;
+	margin-top: 0.5em;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.commentContainer {
+	margin-top: 1em;
+	display: flex;
+	flex-direction: row;
+}
+
+.icon {
+	flex: 1;
+}
+
+.icon > svg {
+	width: 1.5em !important;
+	height: 1.5em !important;
+	margin-right: 0.3em;
+}
+
+.commentBlock {
+	flex: 19;
+	position: relative;
+}
+
+.commentCount {
+	position: absolute;
+	right: 2em;
+	bottom: 0.25em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--bg);
+	border-radius: 1000px;
+	padding: 5px;
+	box-shadow: 1px 1px 2px 2px #8882;
+}
+
+.commentCount > svg {
+	width: 0.5em !important;
+	height: 0.5em !important;
+	margin-right: 0.15em;
+}
+
+.commentCount > span {
+	font-size: 0.6em;
+}
+
+.commentBG {
+	background-color: var(--bg-dark);
+	padding: 0.5em 1em;
+	border-radius: 0.75em;
+}
+
+.username {
+	font-weight: 700;
+	font-size: 0.8em;
+}
+
+.likeBlock {
+	font-size: 0.75em;
+	font-weight: 600;
+	margin-left: 1em;
+}
+
+.likeBlock > span {
+	cursor: pointer;
+}
+
+.likeBlock > span:hover {
+	text-decoration: underline;
+}
+
+.likeBlock > span[data-liked='1'] {
+	color: var(--green-darkest);
+}

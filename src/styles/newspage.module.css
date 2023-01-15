@@ -1,0 +1,25 @@
+.container {
+	background-color: var(--bg);
+}
+
+.container ul {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+	padding: 0 1em;
+}
+
+.container li {
+	list-style-type: none;
+	width: calc(50% - 0.5em);
+}
+
+.container li {
+	outline: 1px solid red;
+}
+
+.container h1,
+.container p {
+	color: var(--text);
+}
