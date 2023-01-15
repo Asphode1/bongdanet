@@ -19,6 +19,19 @@
 	width: 20vw;
 }
 
+.spin {
+	animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 .loginContainer > svg {
 	width: 2em !important;
 	height: 2em !important;
