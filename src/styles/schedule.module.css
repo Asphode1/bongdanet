@@ -48,6 +48,7 @@
 .tabItem[data-onfocus='true'] {
 	background-color: var(--bg-darker);
 	cursor: default;
+	font-weight: 600;
 }
 
 .tabItem[data-onfocus='false']:hover {

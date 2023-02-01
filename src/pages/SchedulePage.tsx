@@ -1,20 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import MatchItem from '../components/schedulePage/matchItem'
 import s from '../styles/schedule.module.css'
-import data from '../assets/test2'
+import useSWR from 'swr'
+import { postFetcher } from '../utils/fetcher'
+import dat from '../assets/test2'
+
+interface LeagueProps {
+	id: number
+	name: string
+	short_name: string | null
+}
 
 export default function SchedulePage() {
+	const { data } = useSWR('/league/list', postFetcher)
 	const [param, setParam] = useSearchParams()
+	const leagueList = data?.data as LeagueProps[]
 	const [league, setLeague] = useState<number>(
-		param.get('league') === null ? -1 : data.findIndex((e) => e.league === param.get('league'))
+		param.get('league') === null && leagueList
+			? -1
+			: leagueList?.findIndex((e) => e.id.toString() === param.get('league'))
 	)
-	const [match, setMatch] = useState<any[]>(data)
-
+	useEffect(() => {
+		console.log(league)
+	}, [league])
 	return (
 		<div className={s.container}>
 			<div className={s.mainSection}>
-				{data.map((e, index) => {
+				{dat.map((e, index) => {
 					return (
 						<div key={index}>
 							<h1>{e.name}</h1>
@@ -35,7 +48,7 @@ export default function SchedulePage() {
 				<h3>Lịch thi đấu</h3>
 				<div className={s.line}></div>
 				<ul>
-					{data.map((e, index) => {
+					{leagueList?.map((e, index) => {
 						return (
 							<li
 								key={index}
@@ -43,7 +56,7 @@ export default function SchedulePage() {
 								data-onfocus={league === index ? 'true' : 'false'}
 								onClick={() => {
 									if (index !== league) {
-										setParam(new URLSearchParams(`?league=${e.league}`))
+										setParam(new URLSearchParams(`?league=${e.id}`))
 										setLeague(index)
 									} else {
 										setParam('')

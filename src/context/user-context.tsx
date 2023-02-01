@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
 export type UserType = {
-	id: string
+	id: number
 }
 
 export type UserContextType = {
@@ -16,6 +16,6 @@ interface UserProviderProps {
 }
 
 export default function UserProvider({ children }: UserProviderProps) {
-	const [user, setUser] = React.useState<UserType | null>(null)
+	const [user, setUser] = React.useState<UserType | null>({ id: 1 })
 	return <UserContext.Provider value={{ user: user, setUser: setUser }}>{children}</UserContext.Provider>
 }
