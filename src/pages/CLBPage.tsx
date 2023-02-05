@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { redirect, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import MainTab from '../components/CLBPage/MainTab'
 import PlayerTab from '../components/CLBPage/PlayerTab'
 import PostsTab from '../components/CLBPage/PostsTab'
@@ -21,8 +21,17 @@ const tabs = [
 ]
 
 export default function CLBPage() {
+	const { cId } = useParams()
+	const id = parseInt(cId ?? '')
 	const [tabParam, setTabParam] = useSearchParams()
 	const [tabIndex, setTabIndex] = useState<number>(tabs.findIndex((e) => e.path === tabParam.get('tab')))
+
+	const navigate = useNavigate()
+	useEffect(() => {
+		navigate(`/cau-lac-bo/${cId}?tab=chung`)
+		setTabIndex(0)
+	}, [cId])
+
 	return (
 		<div className={s.container}>
 			<ul className={s.tabBar}>
@@ -45,7 +54,7 @@ export default function CLBPage() {
 				})}
 				<li className={`${s.underline} ${s.tripleLine}`} style={{ left: `${tabIndex * 32.5 + 1.25}%` }}></li>
 			</ul>
-			<div className={s.content}>{[<MainTab />, <PlayerTab />, <PostsTab />][tabIndex]}</div>
+			<div className={s.content}>{[<MainTab id={id} />, <PlayerTab id={id} />, <PostsTab id={id} />][tabIndex]}</div>
 		</div>
 	)
 }

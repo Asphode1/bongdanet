@@ -1,5 +1,9 @@
 .container {
 	background-color: var(--bg);
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	height: 100%;
+	padding-top: 1em;
 }
 
 .container ul {
@@ -8,14 +12,13 @@
 	flex-wrap: wrap;
 	gap: 1em;
 	padding: 0 1em;
+	max-width: 69.1vw;
 }
 
 .container li {
 	list-style-type: none;
-	width: calc(50% - 0.5em);
-}
-
-.container li {
+	width: calc(100% - 0.5em);
+	min-height: 20vh;
 	outline: 1px solid red;
 }
 

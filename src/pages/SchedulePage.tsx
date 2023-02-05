@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import MatchItem from '../components/schedulePage/matchItem'
 import s from '../styles/schedule.module.css'
 import useSWR from 'swr'
-import { postFetcher } from '../utils/fetcher'
 import dat from '../assets/test2'
+import axios from 'axios'
 
 interface LeagueProps {
 	id: number
@@ -13,7 +13,8 @@ interface LeagueProps {
 }
 
 export default function SchedulePage() {
-	const { data } = useSWR('/league/list', postFetcher)
+	const postFetcher = (url: string) => axios.post(url).then((res) => res.data)
+	const { data } = useSWR('http://football.local.com:80/api/league/list', postFetcher)
 	const [param, setParam] = useSearchParams()
 	const leagueList = data?.data as LeagueProps[]
 	const [league, setLeague] = useState<number>(

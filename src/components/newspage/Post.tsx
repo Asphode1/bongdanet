@@ -1,23 +1,19 @@
 import s from '../../styles/post.module.css'
+import { PostProps } from '../../pages/NewsPage'
 
-export interface PostItemProps {
-	imgsrc: string
-	header: string
-	content: string
+export interface Props {
+	item?: PostProps
 }
 
-export interface PostProps {
-	item: PostItemProps
-}
-
-export default function Post({ item }: PostProps) {
+export default function Post({ item }: Props) {
+	if (item === undefined) return <div>loading...</div>
 	return (
 		<div className={s.container}>
-			<div className={s.img}>
-				<img src={item.imgsrc} alt={'alt'} />
+			<div>
+				<img src={''} alt={'alt'} />
 			</div>
 			<div className={s.content}>
-				<h1>{item.header}</h1>
+				<h1>{item.title}</h1>
 				<p>{item.content}</p>
 			</div>
 		</div>

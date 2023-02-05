@@ -1,5 +1,4 @@
 import PostComment, { PostCommentProps } from '../components/postPage/Comment'
-import useUser from '../hooks/useUser'
 import s from '../styles/postPage.module.css'
 import { UserType } from '../context/user-context'
 
