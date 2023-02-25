@@ -5,9 +5,6 @@ import useUser from '../../hooks/useUser'
 import axios from 'axios'
 import useSWR from 'swr'
 
-const fp = ['Lionel Messi', 'Christiano Ronaldo']
-const rp = ['Eden Hazard']
-
 type StateType = 'followings' | 'suggested'
 type ObjectType = 'club' | 'footballer'
 
@@ -20,9 +17,20 @@ interface ClubProps {
 	club_id: number
 	club_name: string
 }
+
 interface PlayerProps {
 	footballer_id: number
 	footballer_name: string
+}
+
+interface ClubIDProps {
+	id: number
+	name: string
+}
+
+interface PlayerIDProps {
+	id: number
+	name: string
 }
 
 export default function Sidenav() {
@@ -33,12 +41,19 @@ export default function Sidenav() {
 				userId: user?.id,
 			})
 			.then((res) => res.data.data)
-	const { data: fc } = useSWR<ClubProps[]>({ state: 'followings', obj: 'club' }, fetcher)
-	const { data: rc } = useSWR<ClubProps[]>({ state: 'suggested', obj: 'club' }, fetcher)
-	const { data: fp } = useSWR<PlayerProps[]>({ state: 'followings', obj: 'footballer' }, fetcher)
-	const { data: rp } = useSWR<PlayerProps[]>({ state: 'suggested', obj: 'footballer' }, fetcher)
+	const { data: fc } = useSWR<ClubProps[]>(user ? { state: 'followings', obj: 'club' } : null, fetcher)
+	const { data: rc } = useSWR<ClubIDProps[]>(user ? { state: 'suggested', obj: 'club' } : null, fetcher)
+	const { data: fp } = useSWR<PlayerProps[]>(user ? { state: 'followings', obj: 'footballer' } : null, fetcher)
+	const { data: rp } = useSWR<PlayerIDProps[]>(user ? { state: 'suggested', obj: 'footballer' } : null, fetcher)
 	return (
 		<>
+			{user ? null : (
+				<div className={s.noUserWrapper}>
+					<h3>
+						<Link to={'/login'}>Đăng nhập</Link> để theo dõi các câu lạc bộ, cầu thủ.
+					</h3>
+				</div>
+			)}
 			<div className={s.container}>
 				<h1>Câu lạc bộ</h1>
 				<section className={s.section}>
@@ -60,9 +75,9 @@ export default function Sidenav() {
 						{rc?.map((e, index) => {
 							return (
 								<li key={index}>
-									<Link to={`/cau-lac-bo/${e.club_id}?tab=chung`}>
+									<Link to={`/cau-lac-bo/${e.id}?tab=chung`}>
 										<img src={img} alt="logo" />
-										<span>{e.club_name}</span>
+										<span>{e.name}</span>
 									</Link>
 								</li>
 							)
@@ -92,9 +107,9 @@ export default function Sidenav() {
 						{rp?.map((e, index) => {
 							return (
 								<li key={index}>
-									<Link to={`/cau-thu/${e.footballer_id}?tab=chung`}>
+									<Link to={`/cau-thu/${e.id}?tab=chung`}>
 										<img src={img} alt="logo" />
-										<span>{e.footballer_name}</span>
+										<span>{e.name}</span>
 									</Link>
 								</li>
 							)

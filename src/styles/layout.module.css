@@ -183,4 +183,47 @@
 	flex: 6;
 	position: sticky;
 	top: 8vh;
+	z-index: -1;
+}
+
+.userIcon {
+	cursor: pointer;
+	position: relative;
+}
+
+.userIcon > div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.expand {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background-color: var(--bg);
+	padding: 0.5em;
+	border-radius: 1em;
+	width: 10vw;
+	box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.05);
+}
+
+.btn {
+	width: 100%;
+}
+
+.btn > button {
+	background-color: var(--bg);
+	border: none;
+	outline: none;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	border-radius: 0.5em;
+	transition: background-color 0.25s;
+	padding: 0.5em;
+}
+
+.btn > button:hover {
+	background-color: var(--bg-darker);
 }

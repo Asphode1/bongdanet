@@ -69,8 +69,22 @@
 }
 
 .forget {
+	margin-top: 0.25em;
 	position: relative;
 	height: 2em;
+}
+
+.forget input {
+	font-size: 0.75em;
+	margin-right: 0.25em;
+}
+
+.forget label {
+	color: var(--text);
+	font-size: 0.75em;
+	margin-top: 0.15em;
+	display: flex;
+	align-items: center;
 }
 
 .forget a {
@@ -85,6 +99,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-top: 1em;
 }
 
 .loginBtn > button {

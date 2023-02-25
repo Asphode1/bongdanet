@@ -4,16 +4,15 @@ import { useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 export interface PostCommentProps {
-	comment?: {
-		username: string
-		logo: string
-		comment: string
-		likes: number
-	}
+	userId: number
+	userName: string
+	commentId: number
+	comment: string
+	diffTime: string
 }
 
-export default function PostComment({ comment }: PostCommentProps) {
-	const [count, setCount] = useState<number>(comment ? comment.likes : 0)
+export default function PostComment(props: PostCommentProps) {
+	const [count, setCount] = useState<number>(props ? props.userId : 0)
 	const [liked, setLiked] = useState<number>(-1)
 	return (
 		<div className={s.commentContainer}>
@@ -22,9 +21,9 @@ export default function PostComment({ comment }: PostCommentProps) {
 			</div>
 			<div className={s.commentBlock}>
 				<div className={s.commentBG}>
-					<div className={s.username}>{comment ? comment.username : null}</div>
+					<div className={s.username}>{props ? props.userName : null}</div>
 					<div>
-						<span>{comment?.comment}</span>
+						<span>{props?.comment}</span>
 					</div>
 					<div className={s.commentCount}>
 						<ThumbUpIcon />
