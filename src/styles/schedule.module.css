@@ -16,6 +16,14 @@
 	padding: 1em;
 }
 
+.mainSection > div {
+	margin-bottom: 1em;
+}
+
+.mainSection > div > h1 {
+	margin-bottom: 0.25em;
+}
+
 .menu {
 	flex: 1;
 	position: sticky;
@@ -65,27 +73,56 @@
 .matchItem {
 	display: flex;
 	width: 100%;
-	background-color: var(--bg-darker);
 	height: 5em;
+	padding: 1em;
 }
 
 .team {
-	flex: 3;
+	flex: 4;
 	padding: 0 1em 0 1em;
 	display: flex;
 	align-items: center;
+}
+
+.team:first-child {
+	flex-direction: row-reverse;
 }
 
 .team > img {
 	display: inline-block;
 	aspect-ratio: 1;
 	height: 80%;
+	margin: 0 0.5em;
+	border-radius: 1000px;
 }
 
 .result {
 	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.result > span:nth-child(2) {
+	margin: 0 1em;
 }
 
 .listMatch {
 	list-style-type: none;
+	background-color: var(--bg-darker);
+	border-radius: 0.5em;
+	overflow: hidden;
+}
+
+.listMatch > li {
+	border-radius: 0.5em;
+	cursor: pointer;
+}
+
+.listMatch > hr {
+	margin: 0 2em;
+}
+
+.listMatch > hr:last-of-type {
+	display: none;
 }

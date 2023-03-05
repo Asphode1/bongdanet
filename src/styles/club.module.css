@@ -74,3 +74,25 @@
 .content {
 	padding: 1em;
 }
+
+.clbhead {
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+}
+
+.clbhead img {
+	margin-right: 1em;
+	width: 5em;
+	height: 5em;
+	border-radius: 1000px;
+	object-fit: cover;
+}
+
+.clbhead h1 {
+	margin-bottom: 0.5em;
+}
+
+.mainContainer {
+	padding: 0 2em;
+}

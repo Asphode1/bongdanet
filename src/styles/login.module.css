@@ -135,3 +135,27 @@
 .signup > a:hover {
 	background-color: var(--bg-darker);
 }
+
+.optField label {
+	margin-bottom: 0.25em;
+}
+
+.otp {
+	margin-top: 0.25em;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.otp > .input {
+	margin: 0;
+}
+
+.otp > button {
+	cursor: pointer;
+	background: none;
+	border: none;
+	outline: none;
+	color: var(--green-darkest);
+	font-weight: 600;
+}

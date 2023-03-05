@@ -1,39 +1,61 @@
 import axios from 'axios'
 import useSWR from 'swr'
+import s from '../../styles/club.module.css'
 
 export interface TabProps {
-	id: number
+  id: number
 }
 
 interface CLBProps {
-	id: number
-	full_name: string
-	short_name: string
-	founded_in: string
-	owner: string
-	website: string
+  id: number
+  full_name: string
+  short_name: string
+  founded_in: string
+  owner: string
+  website: string
 }
 
 export interface FetcherProps {
-	url: string
-	id: number
+  url: string
+  id: number
 }
 
 export default function MainTab({ id }: TabProps) {
-	const postCLBFetcher = ({ url, id }: FetcherProps) =>
-		axios
-			.post(url, {
-				clubId: id,
-			})
-			.then((res) => res.data.data)
-	const { data } = useSWR<CLBProps>({ url: 'http://football.local.com:80/api/club/info', id: id }, postCLBFetcher)
-	return (
-		<div>
-			<p>{data?.full_name}</p>
-			<p>{data?.short_name}</p>
-			<p>{data?.founded_in}</p>
-			<p>{data?.owner}</p>
-			<p>{data?.website}</p>
-		</div>
-	)
+  const postCLBFetcher = ({ url, id }: FetcherProps) =>
+    axios
+      .post(url, {
+        clubId: id,
+      })
+      .then((res) => res.data.data)
+  const { data } = useSWR<CLBProps>({ url: 'http://football.local.com:80/api/club/info', id: id }, postCLBFetcher)
+  return (
+    <div className={s.mainContainer}>
+      <div className={s.clbhead}>
+        <img src={data ? `../../../public/img/${(data?.id % 10) + 1}.jpg` : ''} alt="club" />
+        <div>
+          <h1>{data?.full_name}</h1>
+        </div>
+      </div>
+      <div>
+        <h2>Tên gọi khác</h2>
+        <p>{data?.short_name}</p>
+      </div>
+      <div>
+        <h2>Chủ sở hữu</h2>
+        <p>{data?.owner}</p>
+      </div>
+      <div>
+        <h2>Nơi thành lập</h2>
+        <p>{data?.founded_in}</p>
+      </div>
+      <div>
+        <h2>Website</h2>
+        <p>
+          <a target="_blank" rel="noopener noreferrer" href={`${data?.website}`}>
+            {data?.website}
+          </a>
+        </p>
+      </div>
+    </div>
+  )
 }

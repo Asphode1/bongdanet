@@ -1,23 +1,33 @@
 .container {
-	height: 10vh;
+	height: 5em;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
+	background-color: var(--bg-dark);
+	border-radius: 1em;
+	padding: 0.75em;
 }
 
 .container > div:first-child {
-	height: 10vh;
-	width: 10vh;
+	height: 100%;
+	aspect-ratio: 1/1;
+	border-radius: 0.5em;
+	overflow: hidden;
+	margin-right: 1em;
 }
 
 .container > div:first-child img {
 	height: 100%;
 	width: 100%;
+	object-fit: cover;
 }
 
 .container > div:last-child {
 	flex: 1;
 	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .container > div:last-child > p {

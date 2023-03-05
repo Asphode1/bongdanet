@@ -23,11 +23,12 @@
 	flex: 60;
 	background-color: #f2f2f2;
 	padding: 2em 2em 0 2em;
+	max-width: calc(100vw / 7 * 6);
 }
 
 .icon {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	margin-top: 1em;
@@ -35,6 +36,7 @@
 
 .icon > h2 {
 	cursor: default;
+	margin-top: 0.25em;
 }
 
 .spin {
@@ -67,11 +69,11 @@
 }
 
 .navlist[data-focus='true'] {
-	background-color: #eee;
+	background-color: #ddd;
 }
 
 .navlist > a {
-	color: #888;
+	color: #444;
 	font-size: 1.25em;
 	display: flex;
 	justify-content: center;
@@ -83,17 +85,69 @@
 .container {
 	background-color: #fff;
 	height: 100%;
-	width: 100%;
+	max-width: 100%;
 	border-radius: 1em 1em 0 0;
+	padding-top: 1em;
+}
+
+.container h1 {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0.5em;
+}
+
+.opts {
+	display: flex;
+	align-items: flex-end;
+	padding: 0 2em 0 5.1em;
+}
+
+.searchBar input {
+	outline: none;
+	border: none;
+	border-bottom: 2px solid #1115;
+	font-size: 1.1em;
+}
+
+.searchBar input:focus {
+	border-bottom: 2px solid var(--green-darkest);
+}
+
+.addNew {
+	margin-left: auto;
+	margin-right: 1em;
+}
+
+.addNew > button {
+	cursor: pointer;
+	outline: none;
+	border: none;
+	border-radius: 1000px;
+	background-color: #ededed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.25em 0.5em 0.25em 1em;
+}
+
+.addNew > button:hover {
+	background-color: #ddd;
+}
+
+.addNew > button > p {
+	font-size: 1.5em;
+	margin-right: 0.25em;
 }
 
 .table {
 	display: block;
-	padding: 2em;
+	margin-top: 0.5em;
+	padding: 0 2em;
 }
 
 .table > table {
 	border-collapse: collapse;
+	max-width: 100%;
 	width: 100%;
 }
 
@@ -106,8 +160,8 @@
 	text-align: center;
 }
 
-.table tr:not(:first-child):hover {
-	background-color: #ddd;
+.table tr:hover {
+	background-color: #eee;
 }
 
 .table td {
@@ -131,4 +185,54 @@
 
 .table th:last-child {
 	width: 20%;
+}
+
+.table td > button {
+	outline: none;
+	border: none;
+	color: white;
+	padding: 0.25em;
+	border-radius: 0.25em;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+.table td > button:first-child {
+	background-color: var(--green-darkest);
+}
+.table td > button:nth-child(2) {
+	background-color: #0ae;
+}
+.table td > button:last-child {
+	background-color: #e20;
+}
+
+.post th:first-child {
+	width: 5%;
+}
+
+.post th:nth-child(3) {
+	width: 50%;
+}
+
+.post th:nth-child(2) {
+	width: 25%;
+}
+
+.post th:last-child {
+	width: 20%;
+}
+
+.table td:nth-child(2) {
+	max-width: calc(25vw / 7 * 6 - 1em);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.table td:nth-child(3) {
+	max-width: calc(50vw / 7 * 6 - 2em);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

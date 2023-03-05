@@ -43,13 +43,20 @@
 }
 .container > h1 {
 	font-size: 1.5em;
-	margin-bottom: 0.5em;
-	margin-left: 0.25em;
+	padding-bottom: 0.5em;
+	padding-left: 0.25em;
+	position: sticky;
+	z-index: 5;
+	top: 0;
+	background-color: #f0f2f5;
 }
 
 .section > h3 {
 	font-size: 1.1em;
 	margin-left: 0.25em;
+	position: sticky;
+	top: 2.2963em;
+	background-color: #f0f2f5;
 }
 
 .section > ul {
@@ -77,4 +84,8 @@
 }
 .section > ul > li > a:hover {
 	background-color: var(--bg-darker);
+}
+
+.img {
+	border-radius: 1000px;
 }
