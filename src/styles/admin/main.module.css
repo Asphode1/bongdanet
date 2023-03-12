@@ -175,15 +175,19 @@
 	align-items: center;
 }
 
-.table th:first-child {
+.club th:first-child {
 	width: 5%;
 }
 
-.table th:nth-child(3) {
-	width: 15%;
+.club th:nth-child(2) {
+	max-width: 20%;
 }
 
-.table th:last-child {
+.club th:nth-child(4) {
+	max-width: 20%;
+}
+
+.club th:last-child {
 	width: 20%;
 }
 
@@ -235,4 +239,45 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.btnDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 1em;
+	padding: 2em;
+}
+
+.btnDiv > button {
+	padding: 0.25em 0.5em;
+	border: none;
+	outline: none;
+	border-radius: 0.25em;
+	background-color: inherit;
+	cursor: pointer;
+}
+
+.btnDiv > button:hover {
+	background-color: var(--bg-dark);
+}
+
+.focusedBtn {
+	background-color: var(--bg-darker) !important;
+}
+
+.footballer th:first-child {
+	width: 5%;
+}
+
+.footballer th:nth-child(3) {
+	width: 15%;
+}
+
+.footballer th:nth-child(2) {
+	width: 25%;
+}
+
+.footballer th:last-child {
+	width: 20%;
 }

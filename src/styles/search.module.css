@@ -1,0 +1,40 @@
+.search {
+	padding: 1em 0 0;
+}
+
+.searchProp {
+	background: var(--bg);
+	border-radius: 1em;
+	padding: 1em;
+	margin-top: 1em;
+}
+
+.searchProp ul {
+	list-style-type: none;
+}
+
+.listItem:not(:has(div)) {
+	background-color: var(--bg-dark);
+	padding: 1em;
+	border-radius: 1em;
+}
+
+.listItem {
+	display: flex;
+	align-items: center;
+	margin-top: 0.5em;
+	width: calc(100vw / 7 * 5 - 4em);
+	cursor: pointer;
+}
+
+.listItem > img {
+	width: 2.5em;
+	height: 2.5em;
+	object-fit: cover;
+	border-radius: 0.5em;
+	margin-right: 1em;
+}
+
+.listItem > p {
+	font-weight: 600;
+}

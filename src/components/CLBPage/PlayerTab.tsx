@@ -3,14 +3,14 @@ import useSWR from 'swr'
 import { TabProps } from './MainTab'
 
 export interface PlayerProps {
-	id?: number
+	id: number
 	full_name: string
 	nationality: string
 	date_of_birth: string
 	height: number
 	clothers_number: number
 	market_price: string
-	club_name?: string
+	club_name: string
 }
 
 export default function PlayerTab({ id }: TabProps) {

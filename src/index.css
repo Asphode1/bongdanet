@@ -41,3 +41,7 @@ body:has(div.delModal) {
 	overflow-y: hidden;
 	padding-right: 15px;
 }
+
+body:has(div.mmodal) {
+	overflow-y: hidden;
+}

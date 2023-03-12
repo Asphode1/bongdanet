@@ -1,8 +1,9 @@
 import { searchUrl } from '../utils/Urls'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import useSWR from 'swr'
 import s from '../styles/search.module.css'
+import Post from '../components/newspage/Post'
 
 interface SearchProps {
 	url: string
@@ -37,10 +38,11 @@ export default function SearchPage() {
 	const searchFetcher = ({ url, searchKey }: SearchProps) => axios.post(url, { searchKey }).then((res) => res.data.data)
 	const { data } = useSWR<SearchResProps>({ url: searchUrl, searchKey: searchQuery }, searchFetcher)
 
-	console.log(data)
+	const navigate = useNavigate()
 
 	return (
 		<div className={s.search}>
+			<h1>Tìm kiếm với từ khoá {searchQuery}</h1>
 			{data?.club.length ? (
 				<div className={s.searchProp}>
 					<h2>Câu lạc bộ</h2>
@@ -48,6 +50,7 @@ export default function SearchPage() {
 						<ul>
 							{data?.club.map((e, index) => (
 								<li key={index}>
+									<img src={`../../public/img/${(index % 10) + 1}.jpg`} alt="logo" />
 									<p>{e.full_name}</p>
 								</li>
 							))}
@@ -61,7 +64,8 @@ export default function SearchPage() {
 					<div>
 						<ul>
 							{data?.footballer.map((e, index) => (
-								<li key={index}>
+								<li className={s.listItem} onClick={() => navigate(`/cau-thu/${e.id}`)} key={index}>
+									<img src={`../../public/img/${(index % 10) + 1}.jpg`} alt="logo" />
 									<p>{e.full_name}</p>
 								</li>
 							))}
@@ -75,8 +79,8 @@ export default function SearchPage() {
 					<div>
 						<ul>
 							{data?.post.map((e, index) => (
-								<li key={index}>
-									<p>{e.title}</p>
+								<li className={s.listItem} key={index}>
+									<Post item={e} />
 								</li>
 							))}
 						</ul>

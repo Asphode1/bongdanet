@@ -6,27 +6,18 @@ import AddNewModal from '../../components/admin/add-new'
 import AddIcon from '@mui/icons-material/Add'
 import DeleteModal from '../../components/admin/del-modal'
 import useDebounce from '../../hooks/useDebounce'
-import InfoModal from '../../components/admin/info-modal/info-footballer'
-import { adminDelFootballer } from '../../utils/Urls'
+import InfoModal from '../../components/admin/info-modal/info-user'
+import { adminDelUser } from '../../utils/Urls'
 
-export interface FootballerProps {
+export interface LeagueProps {
 	id: number
-	full_name: string | null
-	short_name: string | null
-	nationality: string | null
-	place_of_birth: string | null
-	date_of_birth: string | null
-	height: number | null
-	club_id: number | null
-	club_name: string | null
-	clothers_number: number | null
-	market_price: string | null
-	content: string
+	user_name: string
+	phone: string
 }
 
-export default function AdminClub() {
+export default function AdminUser() {
 	const [skey, setSkey] = useState('')
-	const [data, setData] = useState<FootballerProps[]>([])
+	const [data, setData] = useState<LeagueProps[]>([])
 	const [add, setAdd] = useState(false)
 	const [del, setDel] = useState<number | null>(null)
 	const [view, setView] = useState<number | null>(null)
@@ -35,16 +26,10 @@ export default function AdminClub() {
 	const [max, setMax] = useState(0)
 	const postFetcher = (url: string) => axios.post(url).then((res) => res.data.data)
 
-	const { data: postData, mutate } = useSWR<FootballerProps[]>(
-		`http://football.local.com:80/api/admin/footballer/all?page=${page}`,
+	const { data: postData, mutate } = useSWR<LeagueProps[]>(
+		`http://football.local.com:80/api/admin/user/all?page=${page}`,
 		postFetcher
 	)
-
-	useEffect(() => {
-		axios
-			.post('http://football.local.com:80/api/admin/footballer/all?page=1')
-			.then((res) => setMax(res.data.totalPages))
-	}, [])
 
 	const searchKey = useDebounce(skey, 200)
 
@@ -53,14 +38,18 @@ export default function AdminClub() {
 	}, [postData])
 
 	useEffect(() => {
+		axios.post('http://football.local.com:80/api/admin/user/all?page=1').then((res) => setMax(res.data.totalPages))
+	}, [])
+
+	useEffect(() => {
 		if (del === null || add === false || view === null || edit === null) mutate(postData)
 	}, [page, add, del, view, edit])
 
 	useEffect(() => {
 		if (searchKey) {
 			axios
-				.post('http://football.local.com:80/api/admin/footballer/search', { searchKey })
-				.then((res) => setData(res.data.data as FootballerProps[]))
+				.post('http://football.local.com:80/api/admin/user/search', { searchKey })
+				.then((res) => setData(res.data.data as LeagueProps[]))
 		} else setData(postData ?? [])
 	}, [searchKey])
 
@@ -77,21 +66,19 @@ export default function AdminClub() {
 							<p>Thêm mới</p>
 							<AddIcon />
 						</button>
-						{add ? <AddNewModal type="footballer" setAdd={setAdd} /> : null}
-						{del ? <DeleteModal type="footballer" url={adminDelFootballer} del={del} setDel={setDel} /> : null}
-						{view ? <InfoModal viewtype="info" type="footballer" view={view} setView={setView} /> : null}
-						{edit ? <InfoModal viewtype="edit" type="footballer" view={edit} setView={setEdit} /> : null}
+						{add ? <AddNewModal type="user" setAdd={setAdd} /> : null}
+						{del ? <DeleteModal type="user" url={adminDelUser} del={del} setDel={setDel} /> : null}
+						{view ? <InfoModal viewtype="info" type="user" view={view} setView={setView} /> : null}
+						{edit ? <InfoModal viewtype="edit" type="user" view={edit} setView={setEdit} /> : null}
 					</div>
 				</div>
 				<div className={s.table}>
 					<table>
-						<thead className={s.footballer}>
+						<thead className={s.post}>
 							<tr>
 								<th>Id</th>
-								<th>Tên đầy đủ</th>
-								<th>Quốc tịch</th>
-								<th>CLB</th>
-								<th>Số áo</th>
+								<th>Tên</th>
+								<th>Tên viết tắt</th>
 								<th>Tuỳ chọn</th>
 							</tr>
 						</thead>
@@ -99,10 +86,8 @@ export default function AdminClub() {
 							{data.map((e, index) => (
 								<tr key={index}>
 									<td>{e.id}</td>
-									<td>{e.full_name}</td>
-									<td>{e.nationality}</td>
-									<td>{e.club_name}</td>
-									<td>{e.clothers_number}</td>
+									<td>{e.user_name}</td>
+									<td>{e.phone}</td>
 									<td>
 										<button type="button" onClick={() => setView(e.id)}>
 											Chi tiết

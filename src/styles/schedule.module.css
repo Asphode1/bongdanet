@@ -126,3 +126,72 @@
 .listMatch > hr:last-of-type {
 	display: none;
 }
+
+.matchPItem > div:first-child {
+	display: flex;
+	width: 100%;
+	height: 5em;
+	padding: 1em;
+}
+
+.pteam {
+	flex: 2;
+	padding: 0 1em 0 1em;
+	display: flex;
+	align-items: center;
+}
+
+.pteam:first-child {
+	flex-direction: row-reverse;
+}
+
+.pteam > img {
+	display: inline-block;
+	aspect-ratio: 1;
+	height: 80%;
+	margin: 0 0.5em;
+	border-radius: 1000px;
+}
+
+.presult {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.presult > span:nth-child(2) {
+	margin: 0 1em;
+}
+
+.matchPItem > div:last-child {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 0.5em;
+}
+
+.matchPItem > div:last-child p {
+	font-size: 0.85em;
+	font-style: italic;
+}
+
+.date {
+	overflow-x: scroll;
+}
+
+.date ul {
+	max-width: 100%;
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.date ul li {
+	background-color: var(--bg-darker);
+	display: inline-block;
+	padding: 0.25em 0.5em;
+	margin: 0 0.5em;
+	border-radius: 0.25em;
+}

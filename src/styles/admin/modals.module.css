@@ -1,0 +1,159 @@
+.modal {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	background-color: #fff9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modalBox {
+	overflow-y: scroll;
+	max-height: 90vh;
+	background-color: var(--bg);
+	box-shadow: 0 0 5px 5px rgba(100, 112, 120, 12%);
+	border-radius: 1em;
+	padding: 1em;
+	position: relative;
+}
+
+.form form {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	align-items: center;
+}
+
+.form textarea {
+	height: 20em;
+	width: 50em;
+	resize: none;
+}
+
+.form input {
+	width: 50em;
+}
+
+.form input,
+.form textarea {
+	padding: 0.5em;
+	font-size: 1em;
+	border: none;
+	outline: none;
+	border-radius: 0.4em;
+	background-color: var(--bg-dark);
+}
+
+.closeBtn {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	background-color: var(--bg-dark);
+	border-radius: 1000px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.25em;
+	cursor: pointer;
+}
+
+.closeBtn:hover {
+	background-color: var(--bg-darker);
+}
+.form div {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin: 1em 0;
+}
+
+.form span {
+	color: red;
+}
+
+.form button[type='submit'] {
+	position: absolute;
+	right: 0;
+	padding: 0.5em 1em;
+	outline: none;
+	border: none;
+	border-radius: 0.25em;
+	cursor: pointer;
+	background-color: var(--green-darkest);
+	color: var(--bg);
+	font-size: 1em;
+}
+
+.state {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: white;
+	border-radius: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.state > span {
+	font-size: 1.5em;
+}
+
+.state > button {
+	padding: 0.5em 1em;
+	outline: none;
+	border: none;
+	border-radius: 0.25em;
+	cursor: pointer;
+	background-color: var(--green-darkest);
+	color: var(--bg);
+	font-size: 1em;
+}
+
+.btn {
+	padding: 0.5em 1em;
+	outline: none;
+	border: none;
+	border-radius: 0.25em;
+	cursor: pointer;
+	font-size: 1em;
+	background-color: var(--bg-dark);
+	color: var(--text);
+}
+
+.greenbtn {
+	padding: 0.5em 1em;
+	outline: none;
+	border: none;
+	border-radius: 0.25em;
+	cursor: pointer;
+	font-size: 1em;
+	background-color: var(--green-darkest);
+	color: var(--bg);
+}
+
+.modalBox > h2 {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.modalBox > div > button:first-child {
+	margin-right: 1em;
+}
+
+.clubDiv {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
