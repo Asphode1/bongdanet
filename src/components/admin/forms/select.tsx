@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import useDebounce from '../../../hooks/useDebounce'
+import useUser from '../../../hooks/useUser'
 import s from '../../../styles/admin/modals.module.css'
 
 export interface SelectNameProps {
@@ -24,6 +25,7 @@ export function SelectClub({ id, isView, setSelected }: SelectProps) {
 	const [search, setSearch] = useState('')
 	const [data, setData] = useState<SelectFNameProps[]>([])
 
+	const { user } = useUser()
 	const optRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -39,9 +41,17 @@ export function SelectClub({ id, isView, setSelected }: SelectProps) {
 
 	useEffect(() => {
 		if (id !== undefined) {
-			axios.post('http://football.local.com:80/api/admin/club/detail', { clubId: id }).then((res) => {
-				if (res.data.full_name) setSearch(res.data.full_name)
-			})
+			axios
+				.post(
+					'http://football.local.com:80/api/admin/club/detail',
+					{ clubId: id },
+					{
+						headers: { Authorization: `Bearer ${user?.api_token}` },
+					}
+				)
+				.then((res) => {
+					if (res.data.full_name) setSearch(res.data.full_name)
+				})
 		}
 	}, [])
 
@@ -50,7 +60,13 @@ export function SelectClub({ id, isView, setSelected }: SelectProps) {
 	useEffect(() => {
 		if (searchKey !== undefined && searchKey.length && expand) {
 			axios
-				.post('http://football.local.com:80/api/admin/club/search', { searchKey })
+				.post(
+					'http://football.local.com:80/api/admin/club/search',
+					{ searchKey },
+					{
+						headers: { Authorization: `Bearer ${user?.api_token}` },
+					}
+				)
 				.then((res) => setData(res.data.data as SelectFNameProps[]))
 		} else setData([])
 	}, [searchKey, expand])
@@ -94,7 +110,7 @@ export function SelectLeague({ id, isView, setSelected }: SelectProps) {
 	const [expand, setExpand] = useState(false)
 	const [search, setSearch] = useState('')
 	const [data, setData] = useState<SelectNameProps[]>([])
-
+	const { user } = useUser()
 	const optRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -110,12 +126,20 @@ export function SelectLeague({ id, isView, setSelected }: SelectProps) {
 
 	useEffect(() => {
 		if (id !== undefined) {
-			axios.post('http://football.local.com:80/api/admin/league/detail', { leagueId: id }).then((res) => {
-				if (res.data.name) {
-					console.log(res.data.name)
-					setSearch(res.data.name)
-				}
-			})
+			axios
+				.post(
+					'http://football.local.com:80/api/admin/league/detail',
+					{ leagueId: id },
+					{
+						headers: { Authorization: `Bearer ${user?.api_token}` },
+					}
+				)
+				.then((res) => {
+					if (res.data.name) {
+						console.log(res.data.name)
+						setSearch(res.data.name)
+					}
+				})
 		}
 	}, [])
 
@@ -124,7 +148,13 @@ export function SelectLeague({ id, isView, setSelected }: SelectProps) {
 	useEffect(() => {
 		if (searchKey !== undefined && searchKey.length && expand) {
 			axios
-				.post('http://football.local.com:80/api/admin/league/search', { searchKey })
+				.post(
+					'http://football.local.com:80/api/admin/league/search',
+					{ searchKey },
+					{
+						headers: { Authorization: `Bearer ${user?.api_token}` },
+					}
+				)
 				.then((res) => setData(res.data.data as SelectNameProps[]))
 		} else setData([])
 	}, [searchKey, expand])

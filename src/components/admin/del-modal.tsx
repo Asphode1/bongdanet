@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import s from '../../styles/admin/modals.module.css'
 import axios from 'axios'
 import { TypeProps } from './add-new'
+import useUser from '../../hooks/useUser'
 
 interface Props {
 	type: TypeProps
@@ -35,11 +36,15 @@ function getObj({ type, value }: Param) {
 
 export default function DeleteModal({ type, url, del, setDel }: Props) {
 	const [state, setState] = useState(0)
+
+	const { user } = useUser()
 	const handleClick = (e: React.MouseEvent) => {
 		e.preventDefault()
 		if (del !== null) {
 			axios
-				.post(url, getObj({ type, value: del }))
+				.post(url, getObj({ type, value: del }), {
+					headers: { Authorization: `Bearer ${user?.api_token}` },
+				})
 				.then(() => {
 					setState(1)
 				})

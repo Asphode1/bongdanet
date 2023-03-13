@@ -2,6 +2,7 @@ import { useRef, FormEvent, Dispatch, SetStateAction, useState } from 'react'
 import axios from 'axios'
 import { adminCreatePost, adminEditPost } from '../../../utils/Urls'
 import s from '../../../styles/admin/modals.module.css'
+import useUser from '../../../hooks/useUser'
 
 interface Props {
 	id?: number
@@ -14,7 +15,7 @@ interface Props {
 export default function PostForm({ id, title, content, isView, setState }: Props) {
 	const [err, setErr] = useState(false)
 	const formRef = useRef<HTMLFormElement>(null)
-
+	const { user } = useUser()
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (formRef.current) {
@@ -24,7 +25,13 @@ export default function PostForm({ id, title, content, isView, setState }: Props
 			} else {
 				if (isView === undefined) {
 					axios
-						.post(adminCreatePost, { title: formData.get('title'), content: formData.get('content') })
+						.post(
+							adminCreatePost,
+							{ title: formData.get('title'), content: formData.get('content') },
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then((res) => {
 							console.log(res)
 							setState(1)
@@ -35,7 +42,13 @@ export default function PostForm({ id, title, content, isView, setState }: Props
 						})
 				} else {
 					axios
-						.post(adminEditPost, { postId: id, title: formData.get('title'), content: formData.get('content') })
+						.post(
+							adminEditPost,
+							{ postId: id, title: formData.get('title'), content: formData.get('content') },
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then((res) => {
 							console.log(res)
 							setState(1)

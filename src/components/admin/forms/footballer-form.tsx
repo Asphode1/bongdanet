@@ -2,6 +2,7 @@ import { useRef, FormEvent, Dispatch, SetStateAction, useState } from 'react'
 import axios from 'axios'
 import { adminCreateFootballer, adminEditFootballer } from '../../../utils/Urls'
 import s from '../../../styles/admin/modals.module.css'
+import useUser from '../../../hooks/useUser'
 
 interface Props {
 	id?: number
@@ -36,7 +37,7 @@ export default function FootballerForm({
 }: Props) {
 	const [err, setErr] = useState(false)
 	const formRef = useRef<HTMLFormElement>(null)
-
+	const { user } = useUser()
 	const props = [
 		{
 			value: full_name,
@@ -101,18 +102,24 @@ export default function FootballerForm({
 				const clubId = isNaN(str) || str == 0 ? null : str
 				if (isView === undefined) {
 					axios
-						.post(adminCreateFootballer, {
-							fullName: formData.get('full_name'),
-							shortName: formData.get('short_name'),
-							nationality: formData.get('nationality'),
-							placeOfBirth: formData.get('place_of_birth'),
-							dateOfBirth: formData.get('date_of_birth'),
-							height: parseInt(formData.get('height')?.toString() ?? ''),
-							clubId: clubId,
-							clubName: formData.get('club_name'),
-							clothersNumber: parseInt(formData.get('clothers_number')?.toString() ?? '0'),
-							market_price: formData.get('market_price'),
-						})
+						.post(
+							adminCreateFootballer,
+							{
+								fullName: formData.get('full_name'),
+								shortName: formData.get('short_name'),
+								nationality: formData.get('nationality'),
+								placeOfBirth: formData.get('place_of_birth'),
+								dateOfBirth: formData.get('date_of_birth'),
+								height: parseInt(formData.get('height')?.toString() ?? ''),
+								clubId: clubId,
+								clubName: formData.get('club_name'),
+								clothersNumber: parseInt(formData.get('clothers_number')?.toString() ?? '0'),
+								market_price: formData.get('market_price'),
+							},
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then(() => {
 							setState(1)
 						})
@@ -122,19 +129,25 @@ export default function FootballerForm({
 						})
 				} else {
 					axios
-						.post(adminEditFootballer, {
-							footballerId: id,
-							fullName: formData.get('full_name'),
-							shortName: formData.get('short_name'),
-							nationality: formData.get('nationality'),
-							placeOfBirth: formData.get('place_of_birth'),
-							dateOfBirth: formData.get('date_of_birth'),
-							height: parseInt(formData.get('height')?.toString() ?? ''),
-							clubId: clubId,
-							clubName: formData.get('club_name'),
-							clothersNumber: parseInt(formData.get('clothers_number')?.toString() ?? '0'),
-							market_price: formData.get('market_price'),
-						})
+						.post(
+							adminEditFootballer,
+							{
+								footballerId: id,
+								fullName: formData.get('full_name'),
+								shortName: formData.get('short_name'),
+								nationality: formData.get('nationality'),
+								placeOfBirth: formData.get('place_of_birth'),
+								dateOfBirth: formData.get('date_of_birth'),
+								height: parseInt(formData.get('height')?.toString() ?? ''),
+								clubId: clubId,
+								clubName: formData.get('club_name'),
+								clothersNumber: parseInt(formData.get('clothers_number')?.toString() ?? '0'),
+								market_price: formData.get('market_price'),
+							},
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then(() => {
 							setState(1)
 						})

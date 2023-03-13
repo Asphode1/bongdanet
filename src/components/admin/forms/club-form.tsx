@@ -2,6 +2,7 @@ import { useRef, FormEvent, Dispatch, SetStateAction, useState } from 'react'
 import axios from 'axios'
 import { adminCreateClub, adminEditClub } from '../../../utils/Urls'
 import s from '../../../styles/admin/modals.module.css'
+import useUser from '../../../hooks/useUser'
 
 interface Props {
 	id?: number
@@ -16,6 +17,7 @@ interface Props {
 
 export default function ClubForm({ id, full_name, short_name, founded_in, owner, website, isView, setState }: Props) {
 	const [err, setErr] = useState(false)
+	const { user } = useUser()
 	const formRef = useRef<HTMLFormElement>(null)
 
 	const props = [
@@ -55,13 +57,19 @@ export default function ClubForm({ id, full_name, short_name, founded_in, owner,
 			} else {
 				if (isView === undefined) {
 					axios
-						.post(adminCreateClub, {
-							fullName: formData.get('full_name'),
-							shortName: formData.get('short_name'),
-							foundedIn: formData.get('founded_in'),
-							owner: formData.get('owner'),
-							website: formData.get('website'),
-						})
+						.post(
+							adminCreateClub,
+							{
+								fullName: formData.get('full_name'),
+								shortName: formData.get('short_name'),
+								foundedIn: formData.get('founded_in'),
+								owner: formData.get('owner'),
+								website: formData.get('website'),
+							},
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then(() => {
 							setState(1)
 						})
@@ -71,14 +79,20 @@ export default function ClubForm({ id, full_name, short_name, founded_in, owner,
 						})
 				} else {
 					axios
-						.post(adminEditClub, {
-							clubId: id,
-							fullName: formData.get('full_name'),
-							shortName: formData.get('short_name'),
-							foundedIn: formData.get('founded_in'),
-							owner: formData.get('owner'),
-							website: formData.get('website'),
-						})
+						.post(
+							adminEditClub,
+							{
+								clubId: id,
+								fullName: formData.get('full_name'),
+								shortName: formData.get('short_name'),
+								foundedIn: formData.get('founded_in'),
+								owner: formData.get('owner'),
+								website: formData.get('website'),
+							},
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then(() => {
 							setState(1)
 						})

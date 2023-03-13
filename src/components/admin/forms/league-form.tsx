@@ -2,6 +2,7 @@ import { useRef, FormEvent, Dispatch, SetStateAction, useState } from 'react'
 import axios from 'axios'
 import { adminCreateLeague, adminEditLeague } from '../../../utils/Urls'
 import s from '../../../styles/admin/modals.module.css'
+import useUser from '../../../hooks/useUser'
 
 interface Props {
 	id?: number
@@ -14,7 +15,7 @@ interface Props {
 export default function LeagueForm({ id, name, short_name, isView, setState }: Props) {
 	const [err, setErr] = useState(false)
 	const formRef = useRef<HTMLFormElement>(null)
-
+	const { user } = useUser()
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (formRef.current) {
@@ -24,7 +25,13 @@ export default function LeagueForm({ id, name, short_name, isView, setState }: P
 			} else {
 				if (isView === undefined) {
 					axios
-						.post(adminCreateLeague, { name: formData.get('name'), shortName: formData.get('short_name') })
+						.post(
+							adminCreateLeague,
+							{ name: formData.get('name'), shortName: formData.get('short_name') },
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then((res) => {
 							console.log(res)
 							setState(1)
@@ -35,7 +42,13 @@ export default function LeagueForm({ id, name, short_name, isView, setState }: P
 						})
 				} else {
 					axios
-						.post(adminEditLeague, { leagueId: id, name: formData.get('name'), shortName: formData.get('short_name') })
+						.post(
+							adminEditLeague,
+							{ leagueId: id, name: formData.get('name'), shortName: formData.get('short_name') },
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then((res) => {
 							console.log(res)
 							setState(1)

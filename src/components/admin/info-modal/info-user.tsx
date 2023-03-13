@@ -5,6 +5,7 @@ import s from '../../../styles/admin/modals.module.css'
 import { TypeProps } from '../add-new'
 import Form from '../forms/forms'
 import CloseIcon from '@mui/icons-material/Close'
+import useUser from '../../../hooks/useUser'
 
 type ViewType = 'info' | 'edit'
 
@@ -28,7 +29,17 @@ interface DataProps {
 
 export default function InfoModal({ type, viewtype, view, setView }: Props) {
 	const [state, setState] = useState(0)
-	const getPost = ({ url, userId }: FetchProps) => axios.post(url, { userId }).then((res) => res.data.data)
+	const { user } = useUser()
+	const getPost = ({ url, userId }: FetchProps) =>
+		axios
+			.post(
+				url,
+				{ userId },
+				{
+					headers: { Authorization: `Bearer ${user?.api_token}` },
+				}
+			)
+			.then((res) => res.data.data)
 
 	const { data } = useSWR<DataProps>(
 		{ url: 'http://football.local.com:80/api/admin/user/detail', userId: view },

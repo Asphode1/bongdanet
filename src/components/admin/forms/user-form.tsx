@@ -2,6 +2,7 @@ import { useRef, FormEvent, Dispatch, SetStateAction, useState } from 'react'
 import axios from 'axios'
 import { adminCreateUser, adminEditUser } from '../../../utils/Urls'
 import s from '../../../styles/admin/modals.module.css'
+import useUser from '../../../hooks/useUser'
 
 interface Props {
 	id?: number
@@ -14,7 +15,7 @@ interface Props {
 export default function UserForm({ id, user_name, phone, isView, setState }: Props) {
 	const [err, setErr] = useState(false)
 	const formRef = useRef<HTMLFormElement>(null)
-
+	const { user } = useUser()
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (formRef.current) {
@@ -26,11 +27,17 @@ export default function UserForm({ id, user_name, phone, isView, setState }: Pro
 					if (formData.get('pass')?.length === 0) setErr(true)
 					else
 						axios
-							.post(adminCreateUser, {
-								password: formData.get('pass'),
-								user_name: formData.get('user_name'),
-								phone: formData.get('phone'),
-							})
+							.post(
+								adminCreateUser,
+								{
+									password: formData.get('pass'),
+									user_name: formData.get('user_name'),
+									phone: formData.get('phone'),
+								},
+								{
+									headers: { Authorization: `Bearer ${user?.api_token}` },
+								}
+							)
 							.then((res) => {
 								console.log(res)
 								setState(1)
@@ -41,7 +48,13 @@ export default function UserForm({ id, user_name, phone, isView, setState }: Pro
 							})
 				} else {
 					axios
-						.post(adminEditUser, { userId: id, userName: formData.get('user_name'), phone: formData.get('phone') })
+						.post(
+							adminEditUser,
+							{ userId: id, userName: formData.get('user_name'), phone: formData.get('phone') },
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
 						.then((res) => {
 							console.log(res)
 							setState(1)
