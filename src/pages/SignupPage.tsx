@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import s from '../styles/login.module.css'
 import { signupUrl } from '../utils/Urls'
+import { UserType } from '../context/user-context'
 
 interface SignupProps {
 	url: string
@@ -15,31 +16,50 @@ interface SignupProps {
 }
 
 export default function SignupPage() {
-	const [submit, setSubmit] = useState<boolean>(false)
-	const [name, setName] = useState<string>('')
-	const [phone, setPhone] = useState<string>('')
-	const [password, setPassword] = useState<string>('')
 	const [err, setErr] = useState<string>('')
 	const { setUser } = useUser()
 	const navigate = useNavigate()
-
-	const signupFetcher = ({ url, username, phone, password }: SignupProps) =>
-		axios.post(url, { username: username, phone: phone, password: password }).then((res) => res.data)
-
-	const { mutate } = useSWR(submit ? { url: signupUrl, username: name, phone, password } : null, signupFetcher)
+	const [token, setToken] = useState<string>('')
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		setLoading(true)
 		e.preventDefault()
-		const { username, usr, pss, repss } = document.forms[0]
+		const { usrname, usr, pss, repss } = document.forms[0]
 		if (pss.value !== repss.value) {
 			setErr('Mật khẩu không khớp')
 			return
 		}
-		setName(username.value)
-		setPhone(usr)
-		setPassword(pss)
-		setSubmit(true)
-		mutate()
+		axios
+			.post('http://football.local.com:80/api/auth/register', {
+				user_name: usrname.value,
+				phone: usr.value,
+				password: pss.value,
+			})
+			.then(() =>
+				axios.post('http://football.local.com:80/api/auth/login', {
+					phone: usr.value,
+					password: pss.value,
+				})
+			)
+			.then((res) => {
+				setToken(res.data.api_token)
+				return axios.post('http://football.local.com:80/api/auth/get_user_infor', {
+					phone: usr.value,
+				})
+			})
+			.then((res) => {
+				const u: UserType = {
+					id: res.data.id,
+					user_name: res.data.user_name,
+					phone: usr.value,
+					api_token: token,
+				}
+				setUser(u)
+				navigate('/')
+			})
+			.catch((err) => console.error(err))
+			.finally(() => setLoading(false))
 	}
 
 	useEffect(() => {
@@ -74,7 +94,9 @@ export default function SignupPage() {
 						</label>
 					</div>
 					<div className={s.loginBtn}>
-						<button type="submit">Đăng ký</button>
+						<button type="submit" disabled={loading}>
+							Đăng ký
+						</button>
 					</div>
 				</form>
 				<div className={s.line}></div>

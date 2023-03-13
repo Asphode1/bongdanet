@@ -7,6 +7,7 @@
 	box-shadow: 0 0 4px 1px rgba(128, 128, 128, 0.15);
 	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
+	max-width: 69.1vw;
 }
 
 .container::-webkit-scrollbar {
@@ -94,6 +95,7 @@
 	outline: none;
 	min-width: 12em;
 }
+
 .followedBtn {
 	margin-left: auto;
 	padding: 0.5em 0;
@@ -111,4 +113,17 @@
 
 .mainTab > div:not(:first-child) {
 	margin-top: 1em;
+}
+
+.postTab {
+	max-width: 100%;
+}
+
+.postTab ul {
+	list-style-type: none;
+}
+
+.postTab li {
+	max-width: calc(100% - 1em);
+	margin-bottom: 0.5em;
 }

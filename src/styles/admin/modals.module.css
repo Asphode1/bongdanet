@@ -24,8 +24,12 @@
 .form form {
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
+	gap: 0.5em;
 	align-items: center;
+}
+
+.form label {
+	align-self: flex-start;
 }
 
 .form textarea {
@@ -34,11 +38,11 @@
 	resize: none;
 }
 
-.form input {
+.form input:not(.selected) {
 	width: 50em;
 }
 
-.form input,
+.form input:not(.selected),
 .form textarea {
 	padding: 0.5em;
 	font-size: 1em;
@@ -64,7 +68,7 @@
 .closeBtn:hover {
 	background-color: var(--bg-darker);
 }
-.form div {
+.form div:not(.selectBox, .selection) {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -156,4 +160,74 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+}
+
+.selectBox {
+	width: 100%;
+	border-radius: 0.5em;
+	background-color: var(--bg-dark);
+	position: relative;
+}
+
+.selected {
+	width: 100%;
+	padding: 0.5em;
+	display: block;
+	outline: none;
+	border: 1px solid #8882;
+	background-color: inherit;
+	border-radius: 0.5em;
+	font-size: 1em;
+}
+
+.selection {
+	z-index: 10;
+	border: 1px solid #8882;
+	border-top: none;
+	border-bottom-right-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
+	max-height: 10em;
+	overflow-y: scroll;
+	position: absolute;
+	padding-top: 0.5em;
+	top: calc(100% - 0.5em);
+	background-color: var(--bg-dark);
+	width: 100%;
+}
+
+.selection li {
+	display: inline-block;
+	padding: 0.5em;
+	width: 100%;
+	cursor: pointer;
+}
+
+.selection li:last-child {
+	border-bottom-right-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
+}
+
+.selection li:hover {
+	background-color: var(--bg-darker);
+}
+
+.selection li:first-child {
+	border-top: 1px solid #8882;
+}
+
+.selection li:not(:last-of-type) {
+	border-bottom: 1px solid #8882;
+}
+
+.selection > ul {
+	list-style-type: none;
+}
+
+.selection::-webkit-scrollbar {
+	display: none;
+}
+
+.selection {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }

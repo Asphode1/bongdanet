@@ -281,3 +281,23 @@
 .footballer th:last-child {
 	width: 20%;
 }
+
+.match th:first-child {
+	width: 5%;
+}
+
+.match th:nth-child(3) {
+	width: 15%;
+}
+
+.match th:nth-child(2) {
+	width: 15%;
+}
+
+.match th:nth-child(4) {
+	width: 15%;
+}
+
+.match th:last-child {
+	width: 20%;
+}

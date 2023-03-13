@@ -123,7 +123,7 @@
 	margin: 0 2em;
 }
 
-.listMatch > hr:last-of-type {
+.listMatch > div:last-of-type hr {
 	display: none;
 }
 
@@ -177,11 +177,13 @@
 }
 
 .date {
-	overflow-x: scroll;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .date ul {
-	max-width: 100%;
+	max-width: 50vw;
 	list-style-type: none;
 	display: flex;
 	flex-direction: row;
@@ -189,9 +191,26 @@
 }
 
 .date ul li {
+	text-align: center;
+	width: 10em;
 	background-color: var(--bg-darker);
-	display: inline-block;
+	display: block;
 	padding: 0.25em 0.5em;
 	margin: 0 0.5em;
 	border-radius: 0.25em;
+	cursor: pointer;
+}
+
+.selectedDate {
+	background-color: var(--green-darkest) !important;
+	color: var(--bg);
+}
+
+.lH1 {
+	width: 100%;
+	text-align: center;
+}
+
+.lDiv {
+	margin-bottom: 1em;
 }

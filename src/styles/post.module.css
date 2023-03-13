@@ -36,3 +36,8 @@
 	white-space: nowrap;
 	width: 100%;
 }
+
+.container p,
+.container h1 {
+	color: var(--text);
+}
