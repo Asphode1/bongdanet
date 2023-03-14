@@ -36,7 +36,7 @@ export default function PostPage() {
 	const postFetcher = (url: string) => axios.post(url, { postId: pId }).then((res) => res.data.data)
 
 	const { data: post, mutate: postMutate } = useSWR<PostProps>(
-		'http://football.local.com:80/api/admin/post/detail',
+		'http://football.local.com:80/api/post/get_post_detail',
 		postFetcher
 	)
 
