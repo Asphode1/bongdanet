@@ -38,7 +38,7 @@ export default function MainTab({ id }: TabProps) {
 			axios
 				.post('http://football.local.com:80/api/followings/footballer/follow', { userId: user.id, footballerId: id })
 				.then(() => {
-					setFollowed(true)
+					setFollowed((followed) => !followed)
 				})
 				.catch((err) => console.error(err))
 		}
