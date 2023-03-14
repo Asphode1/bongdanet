@@ -50,12 +50,13 @@ export function SelectClub({ id, isView, setSelected }: SelectProps) {
 					}
 				)
 				.then((res) => {
-					if (res.data.full_name) setSearch(res.data.full_name)
+					if (res.data.data.full_name) setSearch(res.data.data.full_name)
 				})
+				.catch((err) => console.error(err))
 		}
 	}, [])
 
-	const searchKey = useDebounce(search, 200)
+	const searchKey = useDebounce(isView === undefined || isView === false ? search : '', 200)
 
 	useEffect(() => {
 		if (searchKey !== undefined && searchKey.length && expand) {
@@ -135,10 +136,7 @@ export function SelectLeague({ id, isView, setSelected }: SelectProps) {
 					}
 				)
 				.then((res) => {
-					if (res.data.name) {
-						console.log(res.data.name)
-						setSearch(res.data.name)
-					}
+					if (res.data.data.name) setSearch(res.data.data.name)
 				})
 		}
 	}, [])
