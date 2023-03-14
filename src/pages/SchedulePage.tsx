@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import s, { lH1 } from '../styles/schedule.module.css'
+import s from '../styles/schedule.module.css'
 import useSWR from 'swr'
 import axios from 'axios'
 import { getDates, MatchDProps, MatchLProps } from './ResultPage'
@@ -84,7 +84,7 @@ export default function SchedulePage() {
 					</div>
 				) : null}
 
-				{dmatch !== null && dmatch !== undefined
+				{dmatch !== null && dmatch !== undefined && dmatch.leagueId !== undefined
 					? Object.keys(dmatch).map((item) => {
 							return (
 								<div key={item}>
@@ -104,7 +104,7 @@ export default function SchedulePage() {
 					  })
 					: null}
 
-				{lmatch !== null && lmatch !== undefined ? (
+				{lmatch !== null && lmatch !== undefined && lmatch.leagueId !== undefined ? (
 					<div key={lmatch.leagueId}>
 						{lmatch.leagueName ? (
 							<h1 className={s.lH1}>Lịch thi đấu {lmatch.leagueName}</h1>
@@ -128,6 +128,11 @@ export default function SchedulePage() {
 						))}
 					</div>
 				) : null}
+
+				{(dmatch !== null && dmatch !== undefined && dmatch.leagueId !== undefined) ||
+				(lmatch !== null && lmatch !== undefined && lmatch.leagueId !== undefined) ? null : (
+					<h1 className={s.lH1}>Không có dữ liệu</h1>
+				)}
 			</div>
 			<div className={s.menu}>
 				<h3>Giải đấu</h3>

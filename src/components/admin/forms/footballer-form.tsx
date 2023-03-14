@@ -3,6 +3,7 @@ import axios from 'axios'
 import { adminCreateFootballer, adminEditFootballer } from '../../../utils/Urls'
 import s from '../../../styles/admin/modals.module.css'
 import useUser from '../../../hooks/useUser'
+import { SelectClub } from './select'
 
 interface Props {
 	id?: number
@@ -38,6 +39,8 @@ export default function FootballerForm({
 	const [err, setErr] = useState(false)
 	const formRef = useRef<HTMLFormElement>(null)
 	const { user } = useUser()
+	const [club, setClub] = useState<number | null>(null)
+
 	const props = [
 		{
 			value: full_name,
@@ -70,16 +73,6 @@ export default function FootballerForm({
 			placeholder: 'Chiều cao',
 		},
 		{
-			value: club_id,
-			name: 'club_id',
-			placeholder: 'ID CLB',
-		},
-		{
-			value: club_name,
-			name: 'club_name',
-			placeholder: 'CLB',
-		},
-		{
 			value: clothers_number,
 			name: 'clothers_number',
 			placeholder: 'Số áo',
@@ -98,8 +91,6 @@ export default function FootballerForm({
 			if (formData.get('full_name')?.length === 0) {
 				setErr(true)
 			} else {
-				const str = parseInt(formData.get('club_id')?.toString() ?? '0')
-				const clubId = isNaN(str) || str == 0 ? null : str
 				if (isView === undefined) {
 					axios
 						.post(
@@ -111,7 +102,7 @@ export default function FootballerForm({
 								placeOfBirth: formData.get('place_of_birth'),
 								dateOfBirth: formData.get('date_of_birth'),
 								height: parseInt(formData.get('height')?.toString() ?? ''),
-								clubId: clubId,
+								clubId: club,
 								clubName: formData.get('club_name'),
 								clothersNumber: parseInt(formData.get('clothers_number')?.toString() ?? '0'),
 								market_price: formData.get('market_price'),
@@ -139,7 +130,7 @@ export default function FootballerForm({
 								placeOfBirth: formData.get('place_of_birth'),
 								dateOfBirth: formData.get('date_of_birth'),
 								height: parseInt(formData.get('height')?.toString() ?? ''),
-								clubId: clubId,
+								clubId: club,
 								clubName: formData.get('club_name'),
 								clothersNumber: parseInt(formData.get('clothers_number')?.toString() ?? '0'),
 								market_price: formData.get('market_price'),
@@ -163,8 +154,25 @@ export default function FootballerForm({
 		<form onSubmit={handleSubmit} ref={formRef}>
 			<h1>{isView === undefined ? 'Thêm mới' : isView ? 'Thông tin chi tiết' : 'Chỉnh sửa'}</h1>
 			<div className={s.clubDiv}>
-				{props.map((e) => (
+				{props.slice(0, 6).map((e) => (
 					<div key={e.name}>
+						<label>{e.placeholder}</label>
+						<input
+							type="text"
+							name={e.name}
+							placeholder={e.placeholder}
+							defaultValue={e.value ?? ''}
+							readOnly={isView !== undefined && isView}
+						/>
+					</div>
+				))}
+				<div>
+					<label>CLB</label>
+					<SelectClub isView={isView} id={club_id} setSelected={setClub} />
+				</div>
+				{props.slice(6, 8).map((e) => (
+					<div key={e.name}>
+						<label>{e.placeholder}</label>
 						<input
 							type="text"
 							name={e.name}

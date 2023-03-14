@@ -108,54 +108,80 @@ export default function MatchForm({
 	return (
 		<form onSubmit={handleSubmit} ref={formRef}>
 			<h1>{isView === undefined ? 'Thêm mới' : isView ? 'Thông tin chi tiết' : 'Chỉnh sửa'}</h1>
-			<label>Đội nhà</label>
-			<SelectClub isView={isView} id={home_team_id} setSelected={setHClub} />
-			<label>Đội khách</label>
-			<SelectClub isView={isView} id={away_team_id} setSelected={setAClub} />
-			<label>Giải đấu</label>
-			<SelectLeague id={league_id} isView={isView} setSelected={setLeague} />
-			<input
-				name="timeStart"
-				placeholder="Thời gian bắt đầu"
-				defaultValue={time_start ?? ''}
-				readOnly={isView !== undefined && isView}
-				onFocus={() => setErr(false)}
-			/>
-			<input
-				name="stadium"
-				placeholder="SVĐ"
-				defaultValue={stadium ?? ''}
-				readOnly={isView !== undefined && isView}
-				onFocus={() => setErr(false)}
-			/>
-			<input
-				name="status"
-				placeholder="Trạng thái"
-				defaultValue={match_status ?? ''}
-				readOnly={isView !== undefined && isView}
-				onFocus={() => setErr(false)}
-			/>
-			<input
-				name="pres"
-				placeholder="Dự đoán tỉ số"
-				defaultValue={predicted_result ?? ''}
-				readOnly={isView !== undefined && isView}
-				onFocus={() => setErr(false)}
-			/>
-			<input
-				name="res"
-				placeholder="Tỉ số"
-				defaultValue={result ?? ''}
-				readOnly={isView !== undefined && isView}
-				onFocus={() => setErr(false)}
-			/>
-			<input
-				name="peres"
-				placeholder="Tỉ số luân lưu"
-				defaultValue={penalty_result ?? ''}
-				readOnly={isView !== undefined && isView}
-				onFocus={() => setErr(false)}
-			/>
+			<div>
+				<label>Đội nhà</label>
+				<SelectClub isView={isView} id={home_team_id} setSelected={setHClub} />
+			</div>
+			<div>
+				<label>Đội khách</label>
+				<SelectClub isView={isView} id={away_team_id} setSelected={setAClub} />
+			</div>
+			<div>
+				<label>Giải đấu</label>
+				<SelectLeague id={league_id} isView={isView} setSelected={setLeague} />
+			</div>
+
+			<div>
+				<label>"Thời gian"</label>
+				<input
+					name="timeStart"
+					placeholder="Thời gian bắt đầu"
+					defaultValue={time_start ?? ''}
+					readOnly={isView !== undefined && isView}
+					onFocus={() => setErr(false)}
+				/>
+			</div>
+			<div>
+				<label>SVĐ</label>
+				<input
+					name="stadium"
+					placeholder="SVĐ"
+					defaultValue={stadium ?? ''}
+					readOnly={isView !== undefined && isView}
+					onFocus={() => setErr(false)}
+				/>
+			</div>
+			<div>
+				<label>Trạng thái</label>
+				<input
+					name="status"
+					placeholder="Trạng thái"
+					defaultValue={match_status ?? ''}
+					readOnly={isView !== undefined && isView}
+					onFocus={() => setErr(false)}
+				/>
+			</div>
+			<div>
+				<label>Dự đoán</label>
+				<input
+					name="pres"
+					placeholder="Dự đoán tỉ số"
+					defaultValue={predicted_result ?? ''}
+					readOnly={isView !== undefined && isView}
+					onFocus={() => setErr(false)}
+				/>
+			</div>
+			<div>
+				<label>Tỉ số</label>
+				<input
+					name="res"
+					placeholder="Tỉ số"
+					defaultValue={result ?? ''}
+					readOnly={isView !== undefined && isView}
+					onFocus={() => setErr(false)}
+				/>
+			</div>
+			<div>
+				<label>Penalty</label>
+				<input
+					name="peres"
+					placeholder="Tỉ số luân lưu"
+					defaultValue={penalty_result ?? ''}
+					readOnly={isView !== undefined && isView}
+					onFocus={() => setErr(false)}
+				/>
+			</div>
+
 			{isView === undefined ? (
 				<div>
 					{err ? <span>Vui lòng nhập đủ thông tin</span> : null}

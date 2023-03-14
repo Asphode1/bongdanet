@@ -128,6 +128,10 @@ export default function SchedulePage() {
 						))}
 					</div>
 				) : null}
+				{(dmatch !== null && dmatch !== undefined && dmatch.leagueId !== undefined) ||
+				(lmatch !== null && lmatch !== undefined && lmatch.leagueId !== undefined) ? null : (
+					<h1 className={s.lH1}>Không có dữ liệu</h1>
+				)}
 			</div>
 			<div className={s.menu}>
 				<h3>Giải đấu</h3>

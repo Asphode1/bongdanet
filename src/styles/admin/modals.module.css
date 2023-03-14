@@ -12,7 +12,6 @@
 }
 
 .modalBox {
-	overflow-y: scroll;
 	max-height: 90vh;
 	background-color: var(--bg);
 	box-shadow: 0 0 5px 5px rgba(100, 112, 120, 12%);
@@ -26,10 +25,6 @@
 	flex-direction: column;
 	gap: 0.5em;
 	align-items: center;
-}
-
-.form label {
-	align-self: flex-start;
 }
 
 .form textarea {
@@ -74,11 +69,20 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	margin: 1em 0;
+	margin: 0.25em 0;
+}
+
+.form div:not(.selectBox, .selection) > label {
+	display: inline-block;
+	width: 7em;
 }
 
 .form span {
 	color: red;
+}
+
+.form div:last-of-type {
+	margin: 0.5em 0;
 }
 
 .form button[type='submit'] {
@@ -163,7 +167,7 @@
 }
 
 .selectBox {
-	width: 100%;
+	width: 50em;
 	border-radius: 0.5em;
 	background-color: var(--bg-dark);
 	position: relative;

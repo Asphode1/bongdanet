@@ -82,6 +82,7 @@ export function SelectClub({ id, isView, setSelected }: SelectProps) {
 				}}
 				className={s.selected}
 				value={search}
+				placeholder={'Nhập CLB'}
 				onChange={(e) => setSearch(e.target.value)}
 				readOnly={isView !== undefined && isView}
 			/>
@@ -165,6 +166,7 @@ export function SelectLeague({ id, isView, setSelected }: SelectProps) {
 					e.target.select()
 					setExpand(true)
 				}}
+				placeholder={'Nhập Giải đấu'}
 				className={s.selected}
 				value={search}
 				readOnly={isView !== undefined && isView}

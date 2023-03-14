@@ -110,6 +110,7 @@ export default function ClubForm({ id, full_name, short_name, founded_in, owner,
 			<div className={s.clubDiv}>
 				{props.map((e) => (
 					<div key={e.name}>
+						<label>{e.placeholder}</label>
 						<input
 							type="text"
 							name={e.name}
