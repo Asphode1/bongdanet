@@ -84,7 +84,7 @@ export default function SchedulePage() {
 					</div>
 				) : null}
 
-				{dmatch !== null && dmatch !== undefined
+				{dmatch !== null && dmatch !== undefined && Object.keys(dmatch).length !== 0
 					? Object.keys(dmatch).map((item) => {
 							return (
 								<div key={item}>
@@ -128,7 +128,7 @@ export default function SchedulePage() {
 						))}
 					</div>
 				) : null}
-				{(dmatch !== null && dmatch !== undefined && dmatch.leagueId !== undefined) ||
+				{(dmatch !== null && dmatch !== undefined && Object.keys(dmatch).length !== 0) ||
 				(lmatch !== null && lmatch !== undefined && lmatch.leagueId !== undefined) ? null : (
 					<h1 className={s.lH1}>Không có dữ liệu</h1>
 				)}
