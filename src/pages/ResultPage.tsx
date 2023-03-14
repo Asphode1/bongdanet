@@ -107,6 +107,9 @@ export default function ResultPage() {
 		}
 	}, [league])
 
+	console.log(lmatch)
+	console.log(dmatch)
+
 	return (
 		<div className={s.container}>
 			<div className={s.mainSection}>
@@ -137,7 +140,7 @@ export default function ResultPage() {
 										{dmatch[item].schedule.map((e) => (
 											<div key={e.match_id}>
 												<li>
-													<MatchItem {...e} />
+													<MatchItem data={e} type="result" />
 												</li>
 												<hr />
 											</div>
@@ -162,7 +165,7 @@ export default function ResultPage() {
 									{lmatch.schedule[item].map((e) => (
 										<div key={e.match_id}>
 											<li>
-												<MatchItem {...e} />
+												<MatchItem data={e} type="result" />
 											</li>
 											<hr />
 										</div>

@@ -49,34 +49,31 @@ export default function MatchForm({
 				setErr(true)
 			} else {
 				if (isView === undefined) {
-					if (formData.get('pass')?.length === 0) setErr(true)
-					else
-						axios
-							.post(
-								adminCreateMatch,
-								{
-									homeTeamId: hclub,
-									awayTeamId: aclub,
-									leagueId: league,
-									timeStart: formData.get('timeStart'),
-									stadium: formData.get('stadium'),
-									statusId: formData.get('status'),
-									predictedResult: formData.get('pres'),
-									result: formData.get('res'),
-									penaltyResult: formData.get('peres'),
-								},
-								{
-									headers: { Authorization: `Bearer ${user?.api_token}` },
-								}
-							)
-							.then((res) => {
-								console.log(res)
-								setState(1)
-							})
-							.catch((err) => {
-								console.error(err)
-								setState(-1)
-							})
+					axios
+						.post(
+							adminCreateMatch,
+							{
+								homeTeamId: hclub,
+								awayTeamId: aclub,
+								leagueId: league,
+								timeStart: formData.get('timeStart'),
+								stadium: formData.get('stadium'),
+								statusId: formData.get('status'),
+								predictedResult: formData.get('pres'),
+								result: formData.get('res'),
+								penaltyResult: formData.get('peres'),
+							},
+							{
+								headers: { Authorization: `Bearer ${user?.api_token}` },
+							}
+						)
+						.then(() => {
+							setState(1)
+						})
+						.catch((err) => {
+							console.error(err)
+							setState(-1)
+						})
 				} else {
 					axios
 						.post(
@@ -97,8 +94,7 @@ export default function MatchForm({
 								headers: { Authorization: `Bearer ${user?.api_token}` },
 							}
 						)
-						.then((res) => {
-							console.log(res)
+						.then(() => {
 							setState(1)
 						})
 						.catch((err) => {

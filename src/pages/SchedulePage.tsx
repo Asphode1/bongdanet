@@ -93,7 +93,7 @@ export default function SchedulePage() {
 										{dmatch[item].schedule.map((e) => (
 											<div key={e.match_id}>
 												<li>
-													<MatchItem {...e} />
+													<MatchItem data={e} type={'schedule'} />
 												</li>
 												<hr />
 											</div>
@@ -118,7 +118,7 @@ export default function SchedulePage() {
 									{lmatch.schedule[item].map((e) => (
 										<div key={item}>
 											<li>
-												<MatchItem {...e} />
+												<MatchItem data={e} type="schedule" />
 											</li>
 											<hr />
 										</div>

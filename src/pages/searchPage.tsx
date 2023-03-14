@@ -64,7 +64,7 @@ export default function SearchPage() {
 					<div>
 						<ul>
 							{data?.footballer.map((e, index) => (
-								<li className={s.listItem} onClick={() => navigate(`/cau-thu/${e.id}`)} key={index}>
+								<li className={s.listItem} onClick={() => navigate(`/cau-thu/${e.id}?tab=chung`)} key={index}>
 									<img src={`../../public/img/${(index % 10) + 1}.jpg`} alt="logo" />
 									<p>{e.full_name}</p>
 								</li>
@@ -79,7 +79,13 @@ export default function SearchPage() {
 					<div>
 						<ul>
 							{data?.post.map((e, index) => (
-								<li className={s.listItem} key={index}>
+								<li
+									className={s.listItem}
+									key={index}
+									onClick={() => {
+										navigate(`/bai-viet/${e.id}`)
+									}}
+								>
 									<Post item={e} />
 								</li>
 							))}
